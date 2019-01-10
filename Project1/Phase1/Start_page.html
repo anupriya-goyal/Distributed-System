@@ -1,0 +1,60 @@
+<!-- This is the first page where user enters input : start and end location and hit submit button for getting waypoints and temperature. -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+    width: 30%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+</style>
+</head>
+<body>
+
+<h3>MyWayPoints </h3>
+
+<div class="container">
+  
+  <form action="code_phase1.php" method ="post">
+    <label for="Start Point">Start Location:</label>
+    
+<input  type="text" name="start" placeholder="Enter start point.." value="">
+    <label for="End Point">End Location:</label>
+    
+ <input type="text" name="end" placeholder="Enter end point.."  value="">   
+
+    <input type="submit" name="submit">
+  </form>
+</div>
+
+</body>
+</html>
