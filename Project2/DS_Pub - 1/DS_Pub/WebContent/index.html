@@ -1,0 +1,96 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+var resultobj1;
+function fun1() {
+	
+	  var newDetails1 = {pubtopic: document.getElementById('pubtopic').value,pubcontent: document.getElementById('pubcontent').value };
+	 
+	  console.log(newDetails1);
+	  $.ajax({
+		'async': false,
+		  type: "POST",
+	      url: "PublisherServlet",
+	      data: newDetails1,
+	     
+	   	  success: function(result){
+	   		  console.log(result);
+	   		
+	   		  var res1=result.substring(1);
+	   		var res = res1.replace("}", "=");
+	   		  console.log(res);
+	   		  var x= res.split("=");
+	   		  console.log(x[0]);
+	   		  console.log(x[1]);
+	   		/*  var y=x[1].split("[");
+	   		 console.log(y[2]);
+	   		  console.log(x.length); */
+	   		console.log(x.length); 
+	   	 if(x[2].length != 8) {
+	   		 
+	   				document.getElementById("p1").innerHTML += "Attention to all "+x[0].toUpperCase()+" subscribers: "+x[2]+"<br/>"+"NOTIFICATION: "+x[1]+"<br/>";
+	   			
+	   			
+	   		}else{ 
+	   			document.getElementById("p1").innerHTML += "Notification for "+x[0].toUpperCase()+" by Publisher: "+x[1].toUpperCase()+"<br/>";  
+	   		  document.getElementById("p1").innerHTML += "Message sent to following subscribers: "+ x[2];
+	   		  
+	   		
+	   		 
+	   	  }
+	  }});
+};
+
+function fun2() {
+	
+	  var newDetails2 = {subname: document.getElementById('subname').value,subtopic: document.getElementById('subtopic').value };
+	  //alert(newDetails1);
+	  console.log(newDetails2);
+	  $.ajax({
+		'async': false,
+		  type: "POST",
+	      url: "SubscriberServlet",
+	      data: newDetails2,
+	   	  success: function(result){
+	   		  console.log(result);
+	   		 var res= result.split(",");
+	   		document.getElementById("p2").innerHTML += "Hurray!!!  "+res[0].toUpperCase()+" you have succesfully subscribed to  "+ res[1].toUpperCase()+"<br />";
+	   		 
+	   	  }
+	  });
+};
+
+</script>
+   <body>
+      <form >
+      <fieldset>
+  <legend>Publisher:</legend>
+        Content: <input type = "text" id="pubcontent" name = "pubcontent" />
+	   Topic:  
+	   <select id="pubtopic" name="pubtopic">
+	  <option value="news">News</option>
+	  <option value="sports">Sports</option>
+	  <option value="weather">Weather</option>
+	  <option value="movies">Movies</option>
+	  <option value="politics">Politics</option>
+	  <option value="music">Music</option>
+	</select>
+         <br />
+        
+         <input type = "button" value = "Publish" onclick="fun1()"/>
+         </fieldset>
+        </form>
+       
+      <form>
+      <fieldset>
+  <legend>Conversation Box:</legend>
+      <div id="result">
+       
+  		<p id="p1"> </p>
+  		<p id="p2"> </p>
+      </div>
+      </fieldset>
+      </form>
+      
+   </body>
+</html>
